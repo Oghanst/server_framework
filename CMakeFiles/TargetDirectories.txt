@@ -1,0 +1,4 @@
+/Users/jianghaojun/Projects/server_framework/CMakeFiles/sylar.dir
+/Users/jianghaojun/Projects/server_framework/CMakeFiles/test.dir
+/Users/jianghaojun/Projects/server_framework/CMakeFiles/edit_cache.dir
+/Users/jianghaojun/Projects/server_framework/CMakeFiles/rebuild_cache.dir

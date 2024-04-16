@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.3 -dynamiclib -Wl,-headerpad_max_install_names -o lib/libsylar.dylib -install_name @rpath/libsylar.dylib CMakeFiles/sylar.dir/sylar/logger.cc.o
