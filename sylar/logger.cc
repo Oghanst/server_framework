@@ -187,32 +187,24 @@ void LogFormatter::init() { // 日志格式解析
             std::cout << "pattern parse error: " << m_pattern << " - " << m_pattern.substr(i) << std::endl;
         }
     }
-    // %m -- 消息体
-    // %p -- level
-    // %r -- 启动后的时间
-    // %c -- 日志名称
-    // %t -- 线程id
-    // %n -- 回车换行
-    // %d -- 时间
-    // %f -- 文件名
-    // %l -- 行号
+
     // 使用直接初始化的方式构造 map
     static std::map<std::string, std::function<FormatItem::ptr(const std::string&)>> s_format_items = {
-        {"m", [](const std::string& fmt) { return std::make_shared<MessageFormatItem>(fmt); }},
-        {"p", [](const std::string& fmt) { return std::make_shared<LevelFormatItem>(fmt); }},
-        {"r", [](const std::string& fmt) { return std::make_shared<ElapseFormatItem>(fmt); }},
-        {"c", [](const std::string& fmt) { return std::make_shared<NameFormatItem>(fmt); }},
-        {"t", [](const std::string& fmt) { return std::make_shared<ThreadIdFormatItem>(fmt); }},
-        {"n", [](const std::string& fmt) { return std::make_shared<NewLineFormatItem>(fmt); }},
-        {"d", [](const std::string& fmt) { return std::make_shared<DateTimeFormatItem>(fmt); }},
-        {"f", [](const std::string& fmt) { return std::make_shared<FilenameFormatItem>(fmt); }},
-        {"l", [](const std::string& fmt) { return std::make_shared<LineFormatItem>(fmt); }}
+        {"m", [](const std::string& fmt) { return std::make_shared<MessageFormatItem>(fmt); }},         // %m -- 消息体
+        {"p", [](const std::string& fmt) { return std::make_shared<LevelFormatItem>(fmt); }},           // %p -- level
+        {"r", [](const std::string& fmt) { return std::make_shared<ElapseFormatItem>(fmt); }},          // %r -- 启动后的时间
+        {"c", [](const std::string& fmt) { return std::make_shared<NameFormatItem>(fmt); }},            // %c -- 日志名称
+        {"t", [](const std::string& fmt) { return std::make_shared<ThreadIdFormatItem>(fmt); }},        // %t -- 线程id
+        {"n", [](const std::string& fmt) { return std::make_shared<NewLineFormatItem>(fmt); }},         // %n -- 回车换行
+        {"d", [](const std::string& fmt) { return std::make_shared<DateTimeFormatItem>(fmt); }},        // %d -- 时间
+        {"f", [](const std::string& fmt) { return std::make_shared<FilenameFormatItem>(fmt); }},        // %f -- 文件名
+        {"l", [](const std::string& fmt) { return std::make_shared<LineFormatItem>(fmt); }}             // %l -- 行号
     };
 
 
     for (auto& i : vec) {
         if(std::get<2>(i) == 0) {
-            m_items.push_back(FormatItem::ptr(new StringFormatItem(std::get<0>(i)))); // get<0>(i) means the first element of i
+            m_items.push_back(FormatItem::ptr(new StringFormatItem(std::get<0>(i)))); // get<0>(i) 意味着取出 tuple 元组i的第一个元素
         } else {
             auto it = s_format_items.find(std::get<0>(i));
             if(it == s_format_items.end()) {
